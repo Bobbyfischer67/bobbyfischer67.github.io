@@ -341,8 +341,6 @@ function calculer(){
   nextStep(3);
 }
 
-  
-document.body.style.minHeight = "1100px";
 </script>
 </body>
 </html>
