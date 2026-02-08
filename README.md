@@ -2,7 +2,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Simulateur DPE Gratuit – Estimation Immédiate</title>
-</head>
 <meta name="description" content="Simulateur gratuit pour estimer votre DPE (Diagnostic de Performance Énergétique) en quelques clics.">
 
 <style>
