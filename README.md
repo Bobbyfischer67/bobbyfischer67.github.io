@@ -340,8 +340,10 @@ function calculer(){
   reco.innerHTML=`<h3>Recommandations</h3><ul><li>Classe ${c} – actions adaptées recommandées.</li></ul>`;
   nextStep(3);
 }
+
+  
+document.body.style.minHeight = "1100px";
 </script>
 </body>
 </html>
 
-document.body.style.minHeight = "1100px";
