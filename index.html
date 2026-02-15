@@ -318,30 +318,69 @@ Ne remplace pas un DPE officiel.
 
 <script>
 function nextStep(n){
-  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('step'+n).classList.add('active');
-  document.querySelectorAll('.progress-step').forEach((p,i)=>p.classList.toggle('active',i<n));
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+
+  document.querySelectorAll('.progress-step').forEach((p,i) => {
+    p.classList.toggle('active', i < n);
+  });
 }
 
 function calculer(){
-  const s=+surface.value||80;
-  let score=annee.value*20+murs.value*30+toiture.value*20+fenetres.value*15+chauffage.value*30+ventilation.value*15;
-  if(type.value==2)score+=35;
-  if(s<50)score-=20;
-  if(s>120)score+=30;
-  score=Math.max(20,Math.min(score,350));
+  const surfaceEl = document.getElementById('surface');
+  const typeEl = document.getElementById('type');
+  const anneeEl = document.getElementById('annee');
+  const mursEl = document.getElementById('murs');
+  const toitureEl = document.getElementById('toiture');
+  const fenetresEl = document.getElementById('fenetres');
+  const chauffageEl = document.getElementById('chauffage');
+  const ventilationEl = document.getElementById('ventilation');
+  const scoreTextEl = document.getElementById('scoreText');
+  const recoEl = document.getElementById('reco');
 
-  let c="G";
-  if(score<=70)c="A";else if(score<=110)c="B";else if(score<=180)c="C";
-  else if(score<=250)c="D";else if(score<=330)c="E";else if(score<=420)c="F";
+  const s = parseInt(surfaceEl.value) || 80;
 
-  scoreText.innerHTML=`${c}<br><span style="font-size:18px">${score} kWh/m²/an</span>`;
+  let score =
+      anneeEl.value * 20 +
+      mursEl.value * 30 +
+      toitureEl.value * 20 +
+      fenetresEl.value * 15 +
+      chauffageEl.value * 30 +
+      ventilationEl.value * 15;
 
-  document.querySelectorAll('.dpe-item').forEach(e=>e.classList.toggle('active',e.dataset.c===c));
+  if(typeEl.value == 2) score += 35;
+  if(s < 50) score -= 20;
+  if(s > 120) score += 30;
 
-  reco.innerHTML=`<h3>Recommandations</h3><ul><li>Classe ${c} – actions adaptées recommandées.</li></ul>`;
+  score = Math.max(20, Math.min(score, 350));
+
+  let c = "G";
+  if(score <= 70) c = "A";
+  else if(score <= 110) c = "B";
+  else if(score <= 180) c = "C";
+  else if(score <= 250) c = "D";
+  else if(score <= 330) c = "E";
+  else if(score <= 420) c = "F";
+
+  scoreTextEl.innerHTML = `
+    ${c}<br>
+    <span style="font-size:18px">${score} kWh/m²/an</span>
+  `;
+
+  document.querySelectorAll('.dpe-item').forEach(e => {
+    e.classList.toggle('active', e.dataset.c === c);
+  });
+
+  recoEl.innerHTML = `
+    <h3>Recommandations</h3>
+    <ul>
+      <li>Classe ${c} – des améliorations ciblées peuvent optimiser la performance.</li>
+    </ul>
+  `;
+
   nextStep(3);
 }
 </script>
+
 </body>
 </html>
